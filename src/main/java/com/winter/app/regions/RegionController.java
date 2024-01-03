@@ -19,6 +19,7 @@ public class RegionController {
 	
 	public RegionController() {
 		this.regionDAO = new RegionDAO();
+		
 	}
 	
 	@RequestMapping(value = "add",method = RequestMethod.POST)
