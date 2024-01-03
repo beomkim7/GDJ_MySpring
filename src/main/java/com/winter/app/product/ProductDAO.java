@@ -22,13 +22,40 @@ public class ProductDAO {
 		
 		while(rs.next()) {
 			ProductDTO productDTO = new ProductDTO();
-			int n = 
+			productDTO.setProductNum(rs.getLong("PRODUCTNUM"));
+			productDTO.setProductName(rs.getString("PRODUCTNAME"));
+			productDTO.setProductContents(rs.getString("PRODUCTCONTENTS"));
+			productDTO.setProductRate(rs.getDouble("PRODUCTRATE"));
+			productDTO.setProductJumsu(rs.getDouble("PRODUCTJUMSU"));
+			
+			ar.add(productDTO);
 		}
-		
+		DBConnector.disConnect(rs, st, con);
+//PRODUCTNUM
+//PRODUCTNAME
+//PRODUCTCONTENTS
+//PRODUCTRATE
+//PRODUCTJUMSU
+		return ar;
 	}
 	
-	public ProductDTO getdetail(ProductDTO productDTO) {
-		return null;
+	public ProductDTO getdetail(ProductDTO productDTO) throws Exception {
+		
+		Connection con = DBConnector.getConnector();
+		String sql = "SELECT * FROM PRODUCT WHERE PRODUCTNUM=?";
+		PreparedStatement st = con.prepareStatement(sql);
+		st.setLong(1, productDTO.getProductNum());
+		ResultSet rs = st.executeQuery();
+		rs.next();
+		productDTO.setProductName(rs.getString("PRODUCTNAME"));
+		productDTO.setProductContents(rs.getString("PRODUCTCONTENTS"));
+		productDTO.setProductRate(rs.getDouble("PRODUCTRATE"));
+		productDTO.setProductJumsu(rs.getDouble("PRODUCTJUMSU"));
+		
+		DBConnector.disConnect(rs, st, con);
+		
+		return productDTO;
+		
 	}
 	
 	public int add(ProductDTO productDTO) {
