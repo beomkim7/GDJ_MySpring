@@ -28,7 +28,7 @@ public class ProductController {
 		return "products/list";
 	}
 	@RequestMapping(value = "detail",method = RequestMethod.GET)
-	public String detail(Model model, HttpServletRequest request) {
+	public String detail(Model model, HttpServletRequest request) throws Exception {
 		Long id = Long.parseLong(request.getParameter("id")); 
 
 		
