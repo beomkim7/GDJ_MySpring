@@ -27,8 +27,8 @@
 					<td>${ dto.productNum}</td>
 					<td>${ dto.productName}</td>
 					<td>${ dto.productContents}</td>
-					<td>${ dto.productRate}</td>
-					<td>${ dto.productJumsu}</td>
+					<td>${ dto.productRate}%</td>
+					<td>${ dto.productJumsu}점</td>
 				</tr>
 			</tbody>
 		</table>

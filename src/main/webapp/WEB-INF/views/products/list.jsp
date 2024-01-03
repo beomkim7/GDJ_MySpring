@@ -28,8 +28,8 @@
 						<td>${ item.productNum}</td>
 						<td>${ item.productName}</td>
 						<td>${ item.productContents}</td>
-						<td>${ item.productRate}</td>
-						<td>${ item.productJumsu}</td>
+						<td>${ item.productRate}%</td>
+						<td>${ item.productJumsu}점</td>
 					</tr>
 				</c:forEach>
 			</tbody>
