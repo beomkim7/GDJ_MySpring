@@ -10,8 +10,11 @@ import java.util.List;
 
 import javax.swing.plaf.synth.Region;
 
+import org.springframework.stereotype.Component;
+
 import com.winter.app.util.DBConnector;
 
+@Component //<-숙지하기
 public class RegionDAO {
 	
 	//Update

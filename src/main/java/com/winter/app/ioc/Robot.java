@@ -30,14 +30,14 @@ public class Robot {
 	
 	
 	//직접 객체 생성방법
-	public Robot() {
-		
-		
-		
-		//기본
-//		this.leftArm=new LeftArm();
-//		this.rightArm=new RightArm();
-	}
+//	public Robot() {
+//		
+//		
+//		
+//		//기본
+////		this.leftArm=new LeftArm();
+////		this.rightArm=new RightArm();
+//	}
 	
 	//매개변수 생성방법
 	public Robot(LeftArm leftArm,RightArm rightArm) {
