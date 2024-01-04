@@ -7,8 +7,9 @@ import java.sql.ResultSet;
 
 public class DBConnector {
 	
-	//1. IP:PORT
-	//2. ID, PW
+		//1-1. IP:PORT
+		//1-2. ID, PW
+		//2-1. 
 	public static Connection getConnector() throws Exception {
 		String user="user01";
 		String password="user01";
