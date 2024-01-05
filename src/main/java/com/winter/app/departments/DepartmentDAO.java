@@ -22,4 +22,12 @@ public class DepartmentDAO {
 	public DepartmentDTO getDetail(DepartmentDTO departmentDTO) {
 		return sqlSession.selectOne(namespace+"getDetail",departmentDTO);
 	}
+	
+	public int getAdd(DepartmentDTO departmentDTO) {
+		return sqlSession.insert(namespace+"getAdd",departmentDTO);
+	}
+	public int getUpdate(DepartmentDTO departmentDTO) {
+		return sqlSession.update(namespace+"getUpdate",departmentDTO);
+		
+	}
 }

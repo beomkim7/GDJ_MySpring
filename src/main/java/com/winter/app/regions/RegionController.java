@@ -23,56 +23,56 @@ public class RegionController {
 //		
 //	}
 	
-//	@RequestMapping(value = "add",method = RequestMethod.POST)
-//	public String add(RegionDTO regionDTO, Model model) throws Exception{
-////		String id = request.getParameter("region_id");
-////		String name = request.getParameter("region_name");
-////		
-////		RegionDTO regionDTO = new RegionDTO();
-////		regionDTO.setRegion_id(Integer.parseInt(id));
-////		regionDTO.setRegion_name(name);
-//		
-//		
-//		
-//		int result = this.regionDAO.add(regionDTO);
-//		
-//		String msg="등록실패";
-//		if(result>0) {
-//			msg="등록성공";
-//		}
-//		
-//		model.addAttribute("msg", msg);
-//		model.addAttribute("path", "./list"); 
-//		
-//		
-//		
-//		return "commons/result";
-//	}
-//	
-//	@RequestMapping(value ="add",method = RequestMethod.GET)
-//	public String add() {
-//		
-//		
-//		
-//		// /WEB-INF/views/ .jsp
-//		
-//		return "regions/add";
-//	}
-//	
-//	@RequestMapping(value = "detail", method = RequestMethod.GET)
-//	public String detail(Integer region_id, Model model) throws Exception{
+	@RequestMapping(value = "add",method = RequestMethod.POST)
+	public String add(RegionDTO regionDTO, Model model) throws Exception{
+//		String id = request.getParameter("region_id");
+//		String name = request.getParameter("region_name");
 //		
 //		RegionDTO regionDTO = new RegionDTO();
-//		//String id = request.getParameter("region_id");
-//		
-//		regionDTO.setRegion_id(region_id);
-//		
-//		regionDTO = regionDAO.getDetail(regionDTO);
-//		
-//		//request.setAttribute("dto", regionDTO);
-//		model.addAttribute("dto",region_id);
-//		return "regions/detail";
-//	}
+//		regionDTO.setRegion_id(Integer.parseInt(id));
+//		regionDTO.setRegion_name(name);
+		
+		
+		
+		int result = this.regionService.add(regionDTO);
+		
+		String msg="등록실패";
+		if(result>0) {
+			msg="등록성공";
+		}
+		
+		model.addAttribute("msg", msg);
+		model.addAttribute("path", "./list"); 
+		
+		
+		
+		return "commons/result";
+	}
+//	
+	@RequestMapping(value ="add",method = RequestMethod.GET)
+	public String add() {
+		
+		
+		
+		// /WEB-INF/views/ .jsp
+		
+		return "regions/add";
+	}
+//	
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String detail(Integer region_id, Model model) throws Exception{
+		
+		RegionDTO regionDTO = new RegionDTO();
+		//String id = request.getParameter("region_id");
+		
+		regionDTO.setRegion_id(region_id);
+		
+		regionDTO = regionService.getDetail(regionDTO);
+		
+		//request.setAttribute("dto", regionDTO);
+		model.addAttribute("dto",regionDTO);
+		return "regions/detail";
+	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView list() throws Exception {

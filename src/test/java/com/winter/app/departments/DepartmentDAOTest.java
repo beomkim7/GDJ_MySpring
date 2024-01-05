@@ -17,6 +17,24 @@ public class DepartmentDAOTest extends MyTest{
 	private DepartmentDAO departmentDAO;
 	
 	@Test
+	public void getUpdate() throws Exception{
+		DepartmentDTO departmentDTO = new DepartmentDTO();
+		departmentDTO.setDepartment_name("upup");
+		int result = departmentDAO.getUpdate(departmentDTO);
+		
+		assertEquals(1, result);
+	}
+	
+	@Test
+	public void getAddTest() throws Exception{
+		DepartmentDTO departmentDTO = new DepartmentDTO();
+		departmentDTO.setDepartment_name("test");
+		int result = departmentDAO.getAdd(departmentDTO);
+		
+		assertEquals(1, result);
+	}
+	
+	@Test
 	public void getListTest() throws Exception {
 	
 		List<DepartmentDTO> ar = departmentDAO.getList();

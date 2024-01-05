@@ -25,10 +25,18 @@ public class RegionDAO {
 	private SqlSession sqlSession;
 	private final String namespace="com.winter.app.regions.RegionDAO.";
 	
+	public int delete(RegionDTO regionDTO)throws Exception{
+		return sqlSession.delete(namespace+"delete",regionDTO);
+	}
 	
+	public int update(RegionDTO regionDTO)throws Exception{
+		return sqlSession.update(namespace+"update",regionDTO);
+	}
 	
-	
-	
+	public int add(RegionDTO regionDTO) throws Exception {
+		return sqlSession.insert(namespace+"add", regionDTO);
+	}
+		
 	
 	//detail
 	public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{
