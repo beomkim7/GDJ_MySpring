@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,6 +18,47 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 public class RegionController {
 	@Autowired //<-숙지하기	
 	private RegionService regionService;
+	
+	public ModelAndView update(RegionDTO regionDTO,ModelAndView mv)throws Exception{
+		
+		int result = regionService.update(regionDTO);
+		
+		String msg = "삭제실패";
+		if(result>0) {
+			msg="삭제성공";
+		}
+		mv.addObject("msg",msg);
+		mv.addObject("path","./list");
+		
+		mv.setViewName("commons/result");
+		
+		return mv;
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public void update(RegionDTO regionDTO, Model model)throws Exception{
+		regionDTO = regionService.getDetail(regionDTO);
+		model.addAttribute("dto",regionDTO);
+		
+	}
+	
+	@RequestMapping(value = "delete",method = RequestMethod.POST)
+	public String delete(RegionDTO regionDTO,Model model)throws Exception{
+		int result = regionService.delete(regionDTO);
+		
+		String msg = "삭제실패";
+		if(result>0) {
+			msg="삭제성공";
+		}
+		model.addAttribute("msg",msg);
+		model.addAttribute("path","./list");
+		
+		return "commons/result";
+	}
+	
 	
 //	public RegionController() {
 //		this.regionDAO = new RegionDAO();
@@ -58,6 +100,7 @@ public class RegionController {
 		
 		return "regions/add";
 	}
+	
 //	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public String detail(Integer region_id, Model model) throws Exception{

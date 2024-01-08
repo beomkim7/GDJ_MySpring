@@ -5,12 +5,21 @@
 
 
 const del = document.getElementById("del");
-const test = document.getElementById("test");
+const frm = document.getElementById("frm");
+const up = document.getElementById("up");
 
-test.addEventListener("click",function(){
-    alert("test");
+up.addEventListener("click", function(){
+   
+    let id = up.getAttribute('up.data-region-id');
+   location.href="./update?region_id=";
 })
+
 
 del.addEventListener("click",function(){
-    alert("test");
+    let result = confirm("정말 지울거냐?")
+
+    if(result){
+    frm.submit();
+    }
 })
+

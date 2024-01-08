@@ -52,9 +52,14 @@
 			<c:if test="${dto != null}">
 			<h3>${dto.region_id}</h3>
 			<div>${dto.region_name}</div>
-			</c:if>
-			<button id="test">test</button>
-     		 <button id="del">del</button>
+			<a href="">Update</a>
+      <button id="up" data-region-id="${dto.region_id}">Update</button>
+      <button id="del">Delete</button>
+
+      <form id= "frm" action="./delete" method="post">
+      <input type="hidden" name="region_id" value="${dto.region_id}">
+    </form>
+      </c:if>
 			<c:if test="${empty dto}">
 			<h3>비어있음</h3>
 			</c:if>
