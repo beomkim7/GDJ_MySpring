@@ -13,16 +13,12 @@
   	</select>
   	
   	
-  	<!-- list -->
-  	<select id="getList" resultType="RegionDTO">
-  		SELECT * FROM REGIONS 
-  	</select>
-  	
-  	<!--  Insert -->
-  	<insert id="add"  parameterType="RegionDTO">
-  		INSERT INTO REGIONS 
-  		VALUES (EMPLOYEES_SEQ.NEXTVAL, #{region_name})
-  	</insert>
+<!-- Insert -->
+	<insert id="add" parameterType="RegionDTO">
+		INSERT INTO REGIONS
+		VALUES (EMPLOYEES_SEQ.NEXTVAL, #{region_name})
+	</insert>
+		
   	
   	<!-- Update -->
   	<update id="update" parameterType="RegionDTO">	
@@ -32,10 +28,22 @@
   	
   	<!-- Delete -->	
   	<delete id="delete" parameterType="com.winter.app.regions.RegionDTO">
-  		DELETE REGIONS WHERE REGION_NAME = #{region_name}
+  		DELETE REGIONS WHERE REGION_ID = #{region_id}
   	</delete>
   	
-  	
+  	<!-- list -->
+	<select id="getList" resultType="RegionDTO" parameterType="Pager">
+		SELECT * FROM
+		(
+			SELECT ROWNUM R, RG.* FROM
+				(
+					SELECT * FROM REGIONS 
+					ORDER BY REGION_ID DESC
+				) RG
+		)
+		WHERE R BETWEEN #{startRow} AND #{lastRow}
+		
+	</select>
   	
   	
   	

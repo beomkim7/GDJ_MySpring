@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.winter.app.util.DBConnector;
+import com.winter.app.util.Pager;
 
 @Repository //<-숙지하기
 public class RegionDAO {
@@ -45,8 +46,8 @@ public class RegionDAO {
 		
 	}
 	
-	public List<RegionDTO> getList() throws Exception{
-		return sqlSession.selectList(namespace+"getList");
+	public List<RegionDTO> getList(Pager pager) throws Exception{
+		return sqlSession.selectList(namespace+"getList",pager);
 	}
 
 }

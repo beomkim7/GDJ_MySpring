@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import com.winter.app.util.Pager;
+
 @Controller
 @RequestMapping(value = "/regions/*")
 public class RegionController {
@@ -118,10 +120,10 @@ public class RegionController {
 	}
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public ModelAndView list() throws Exception {
+	public ModelAndView list(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		List<RegionDTO> ar = regionService.getList();
+		List<RegionDTO> ar = regionService.getList(pager);
 		
 		mv.addObject("list", ar);
 		mv.setViewName("regions/list");
