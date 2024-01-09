@@ -16,7 +16,28 @@ public class Pager {
 	//다음 블럭이 없으면 true;
 	private boolean last;
 	
+	private String search;
+	private String kind;
 	
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getSearch() {
+		if(this.search == null) {
+			this.search = "";
+		}
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
 
 	//startRow, lastRow계산하는 메서드
 	public void makeRow() {
@@ -28,43 +49,40 @@ public class Pager {
 	}
 	
 	public void makeNum(Long totalCount) {
-		Long totalPage = 0L;
+		Long totalPage=0L;
 		totalPage = totalCount/this.getPerPage();
 		
-		//1. 총 갯수로 총 페이지 수 구하기
-		if(totalCount%this.getPerPage() !=0) {
+		
+		if(totalCount%this.getPerPage() != 0) {
+			//totalPage=totalPage+1;
 			totalPage++;
 		}
 		
 		this.setTotalPage(totalPage);
-	
 		
 		//2. 총블럭의 수 구하기
-		Long perBlock = 5L;
-		Long totalBlock = 0L;		
-		totalBlock=totalPage*perBlock;
-		
-		if(totalPage%perBlock !=0) {
+		Long perBlock=5L;//블럭당 번호의 갯수
+		Long totalBlock=0L;
+		totalBlock=totalPage/perBlock;
+		if(totalPage%perBlock != 0) {
 			totalBlock++;
 		}
-		
 		//3. Page 값으로 현재 블럭 번호 구하기
-		Long curBlock = 0L;
-		curBlock = this.getPage()/perBlock;
-		if(this.getPage()%perBlock !=0) {
+		Long curBlock=0L;//블럭 번호
+		curBlock=this.getPage()/perBlock;
+		if(this.getPage()%perBlock != 0) {
 			curBlock++;
 		}
 		
 		//4. 현재 블럭 번호로 시작 번호와 끝번호 구하기
-		Long startNum = 0L;
-		Long lastNum = curBlock*perBlock;
-		startNum = lastNum-perBlock+1;
+		Long startNum=0L;
+		Long lastNum=curBlock*perBlock;
+		startNum=lastNum-perBlock+1;
 		
 		this.setStartNum(startNum);
 		this.setLastNum(lastNum);
 		
-		//5. 이전, 다음 블럭 유무
-		
+		//이전, 다음 블럭 유무
 		if(curBlock==1) {
 			this.setStart(true);
 		}

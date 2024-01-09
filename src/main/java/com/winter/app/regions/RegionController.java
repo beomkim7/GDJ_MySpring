@@ -20,7 +20,9 @@ public class RegionController {
 	
 	@Autowired
 	private RegionService regionService;
-		
+	
+	
+	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public ModelAndView update(RegionDTO regionDTO, ModelAndView mv)throws Exception{
 		
@@ -112,11 +114,9 @@ public class RegionController {
 	public ModelAndView list(Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("TotalPage1 :"+pager.getTotalPage());
-		
+		System.out.println("TotalPage :"+pager.getTotalPage());
 		List<RegionDTO> ar = regionService.getList(pager);
-		
-		System.out.println("TotalPage2 :"+pager.getTotalPage());
+		System.out.println("TotalPage :"+pager.getTotalPage());
 		mv.addObject("list", ar);
 		mv.addObject("pager", pager);
 		mv.setViewName("regions/list");
