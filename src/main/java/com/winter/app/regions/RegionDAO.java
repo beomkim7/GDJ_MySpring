@@ -4,50 +4,61 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.synth.Region;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.metadata.SqlServerCallMetaDataProvider;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.winter.app.util.DBConnector;
 import com.winter.app.util.Pager;
 
-@Repository //<-숙지하기
+@Repository
 public class RegionDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
 	private final String namespace="com.winter.app.regions.RegionDAO.";
 	
-	public int delete(RegionDTO regionDTO)throws Exception{
-		return sqlSession.delete(namespace+"delete",regionDTO);
+
+	//delete
+	public int delete(RegionDTO regionDTO) throws Exception {
+
+		return sqlSession.delete(namespace+"delete", regionDTO);
+		
+	}	
+	
+	//update
+	public int update(RegionDTO regionDTO) throws Exception {
+
+		return sqlSession.update(namespace+"update", regionDTO);
+		
 	}
 	
-	public int update(RegionDTO regionDTO)throws Exception{
-		return sqlSession.update(namespace+"update",regionDTO);
-	}
-	
-	public int add(RegionDTO regionDTO) throws Exception {
+	//Insert
+	public int add(RegionDTO regionDTO)throws Exception{
 		return sqlSession.insert(namespace+"add", regionDTO);
 	}
-		
 	
 	//detail
 	public RegionDTO getDetail(RegionDTO regionDTO)throws Exception{
-		return sqlSession.selectOne(namespace+"getDetail",regionDTO);
-				
-		
+		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
 	}
 	
-	public List<RegionDTO> getList(Pager pager) throws Exception{
-		return sqlSession.selectList(namespace+"getList",pager);
+	public Long getTotal()throws Exception{
+		return sqlSession.selectOne(namespace+"getTotal");
 	}
+	
+	public List<RegionDTO> getList(Pager pager) throws Exception {
+		return sqlSession.selectList(namespace+"getList", pager);
+	}
+	
+//	public HashMap<String, Object> getDetail(RegionDTO regionDTO)throws Exception{
+//		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
+//	}
+//	
+//	public List<HashMap<String, Object>> getList() throws Exception {
+//		return sqlSession.selectList(namespace+"getList");
+//	}
 
 }

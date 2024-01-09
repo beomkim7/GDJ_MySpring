@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	let msg = '${msg}';
 	alert(msg);
-	location.href="${path}"
+	location.href='${path}';
 
 </script>
 

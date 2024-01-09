@@ -8,67 +8,53 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.winter.app.MyTest;
-import com.winter.app.regions.RegionDAO;
-import com.winter.app.regions.RegionDTO;
 import com.winter.app.util.Pager;
 
-public class RegionDAOTest extends MyTest{
-	
+public class RegionDAOTest extends MyTest {
+
 	@Autowired
 	private RegionDAO regionDAO;
 	
 	//@Test
-	public void deleteTest() throws Exception{
+	public void addTest()throws Exception{
 		RegionDTO regionDTO = new RegionDTO();
 		
-		regionDTO.setRegion_name("Test");
-		int result = regionDAO.delete(regionDTO);
-		
-		assertEquals(1, result);
-	}
-	
-	
-	//@Test
-	public void updateTest() throws Exception{
-		RegionDTO regionDTO = new RegionDTO();
-		
-		regionDTO.setRegion_name("update_Test");
-		int result = regionDAO.update(regionDTO);
-		
-		assertEquals(1, result);
-	}
-	
-	//@Test
-	public void addTest() throws Exception{
-		RegionDTO regionDTO = new RegionDTO();
-		
-		for(int i = 0;i<100;i++) {
+		for(int i=0;i<100;i++) {
 			regionDTO.setRegion_name("Test"+i);
-			int result = regionDAO.add(regionDTO);		
+			int result = regionDAO.add(regionDTO);
 			if(i%10==0) {
-				Thread.sleep(i);
+				Thread.sleep(500);
 			}
+			
+		
 		}
 		System.out.println("100개 입력 완료");
 		//assertEquals(1, result);
+		
+		
 	}
 	
 	@Test
-	public void getListTest() throws Exception{
+	public void getListTest()throws Exception{
 		Pager pager = new Pager();
 		pager.setPage(2L);
 		pager.makeRow();
 		List<RegionDTO> ar = regionDAO.getList(pager);
 		System.out.println(ar.get(0).getRegion_name());
-		assertNotEquals(10, ar.size());
+		assertEquals(10, ar.size());
 	}
 	
 	//@Test
-	public void getDetailTest() throws Exception{
+	public void getDetailTest()throws Exception{
 		RegionDTO regionDTO = new RegionDTO();
 		regionDTO.setRegion_id(1);
 		regionDTO = regionDAO.getDetail(regionDTO);
 		
 		assertNotNull(regionDTO);
+		
 	}
+
+	
+	
+
 }
