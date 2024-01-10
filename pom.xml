@@ -8,6 +8,7 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
+	
 		<!-- 변수명 설정구간 -->
 		<java-version>1.11</java-version> 
 		<!--   <- 버전변경 했음
@@ -25,6 +26,13 @@
 	
 	<dependencies>
 		
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.5</version>
+		</dependency>
+				
 		<!-- mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>

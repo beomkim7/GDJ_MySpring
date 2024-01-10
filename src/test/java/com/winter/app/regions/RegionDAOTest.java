@@ -24,13 +24,10 @@ public class RegionDAOTest extends MyTest {
 			int result = regionDAO.add(regionDTO);
 			if(i%10==0) {
 				Thread.sleep(500);
-			}
-			
-		
+			}		
 		}
 		System.out.println("100개 입력 완료");
-		//assertEquals(1, result);
-		
+		//assertEquals(1, result);		
 		
 	}
 	
@@ -52,9 +49,6 @@ public class RegionDAOTest extends MyTest {
 		
 		assertNotNull(regionDTO);
 		
-	}
-
-	
-	
+	}	
 
 }

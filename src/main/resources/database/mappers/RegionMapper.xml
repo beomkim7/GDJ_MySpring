@@ -8,47 +8,55 @@
 <mapper namespace="com.winter.app.regions.RegionDAO">
 	
 	<sql id="search3">
-		<!-- TITLE, CONTENTS , WTITER -->
-		WHERE		
+		<!-- TITLE, CONTENTS, WRITER -->
+		WHERE
 		<choose>
-			<when test="kine=='kine1">
-				TITLE LIKE '%'||#{search}||'%'	
+			<when test="kind=='kind1'">
+				TITLE LIKE '%'||#{search}||'%'
 			</when>
 			
-			<when test="kine=='kine2">
-				CONTENTS LIKE '%'||#{search}||'%'	
-			</when>			
+			<when test="kind=='kind2'">
+				CONTENTS LIKE '%'||#{search}||'%'
+			</when>
 			<otherwise>
 				WRITER LIKE '%'||#{search}||'%'
 			</otherwise>
-		</choose>		
+		
+		</choose>	
 	</sql>
 	
 	<sql id="search2">
-		<!-- TITLE, CONTENTS , WTITER -->
+		<bind name="p" value="'%'+_parameter.getSearch()+'%'"/>
+		<!-- TITLE, CONTENTS, WRITER -->
 		<where>
-			<if test="kind=='kine1' or kind=='kind4'">
-			TITLE LIKE '%'||#{search}||'%'
-			</if>
-									
-			<if test="kind=='kine2' or kind=='kind4'">
-			OR CONTENTS LIKE '%'||#{search}||'%'
-			</if>
-			
-			<if test="kind=='kine3' or kind=='kind4'">
-			OR WRITER LIKE '%'||#{search}||'%'
-			</if>
+		<if test="kind=='kind1' or kind=='kind4'">
+		TITLE LIKE #{p}
+		</if>
+		
+		<if test="kind =='kind2' or kind=='kind4'">
+		
+		OR CONTENTS LIKE '%'||#{search}||'%'
+		</if>
+		
+		<if test="kind=='kind3' or kind=='kind4'">
+		OR WRITER LIKE '%'||#{search}||'%'
+		</if>
 		</where>
+		
+		
 	</sql>
 	
 	<sql id="search">
 		
 		WHERE REGION_NAME LIKE '%'||#{search}||'%'
 	</sql>
-		
+	
+	
+	
 	<!-- Delete -->
 	<delete id="delete" parameterType="RegionDTO">
 		DELETE REGIONS WHERE REGION_ID=#{region_id}
+		
 	</delete>
 	
 	<!-- update -->
@@ -57,10 +65,19 @@
 		WHERE REGION_ID=#{region_id}
 	</update>
 	
+	<insert id="addFile" parameterType="RegionFileDTO">
+		INSERT INTO REGIONFILES
+		VALUES(FILE_SEQ.NEXTVAL,#{region_id},#{fileName}, #{oriName})
+	</insert>
+	
 	<!-- Insert -->
 	<insert id="add" parameterType="RegionDTO">
+		<selectKey keyProperty="region_id" order="BEFORE" resultType="Long">
+			SELECT EMPLOYEES_SEQ.NEXTVAL FROM DUAL 
+			<!-- DUAL 가상 테이블 -->
+		</selectKey>
 		INSERT INTO REGIONS
-		VALUES (EMPLOYEES_SEQ.NEXTVAL, #{region_name})
+		VALUES (#{region_id}, #{region_name})
 	</insert>
 	
 
@@ -74,7 +91,7 @@
 	<!-- getTotal -->
 	<select id="getTotal" resultType="Long" parameterType="Pager">
 		SELECT COUNT(REGION_ID) FROM REGIONS
-		<include refid="search"/>
+		<include refid="search"></include>
 	</select>
 	
 	<!-- list -->
@@ -84,7 +101,7 @@
 			SELECT ROWNUM R, RG.* FROM
 				(
 					SELECT * FROM REGIONS
-						<include refid="search"/>				 	
+					<include refid="search" /> 
 					ORDER BY REGION_ID DESC
 				) RG
 		)
