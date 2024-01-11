@@ -55,6 +55,12 @@ public class RegionDAO {
 	public List<RegionDTO> getList(Pager pager) throws Exception {
 		return sqlSession.selectList(namespace+"getList", pager);
 	}
+	//File List 1:N
+	public List<RegionFileDTO> getListFiles(RegionDTO regionDTO)throws Exception{
+		return sqlSession.selectList(namespace+"getListFiles", regionDTO);
+	}
+	
+	
 	
 //	public HashMap<String, Object> getDetail(RegionDTO regionDTO)throws Exception{
 //		return sqlSession.selectOne(namespace+"getDetail", regionDTO);
