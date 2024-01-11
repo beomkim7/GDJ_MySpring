@@ -20,37 +20,40 @@
 	<div>
 		<form class="row g-3" action="./list">
 		  <div class="col-auto">
-		  <select name="kind" class="form-select" aria-label="Default select example">
-			  <option value="kind1">Title</option>
-			  <option value="kind2">Contents</option>
-			  <option value="kind3">Writer</option>
-			  <option value="kind4">Title+Contents+Writer</option>
-		</select>
-		  
+		  	<select name="kind" class="form-select" aria-label="Default select example">
+			  <option class="a" value="kind1">Title</option>
+			  <option class="a" value="kind2">Contents</option>
+			  <option class="a" value="kind3">Writer</option>
+			  <option class="a" value="kind4">Title+Contents+Writer</option>
+			</select>
 		  </div>		
 		
 		  <div class="col-auto">
 		    <label for="search" class="visually-hidden">Search</label>
 		    <input type="text" name="search" class="form-control" id="search">
 		  </div>
+
 		  <div class="col-auto">
 		    <button type="submit" class="btn btn-primary mb-3">검색</button>
 		  </div>
-		</form>
+.		</form>
 	</div>
 	
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<th>ID</th><th>NAME</th>
+				<th>NUM</th><th>NAME</th><th>CONTENTS</th><th>RATE</th><th>JUMSU</th>
 			</tr>
 		</thead>
 		<!-- for(int i=0;i<;i++) -->
 		<!-- for(타입명 변수명:배열명) -->
 		<c:forEach items="${requestScope.list}" var="dto">
 			<tr>
-				<td>${pageScope.dto.region_id}</td>
-				<td><a href="./detail?region_id=${dto.region_id}">${pageScope.dto.region_name}</a></td>
+				<td>${pageScope.dto.productNum}</td>
+				<td><a href="./detail?region_id=${dto.productNum}">${pageScope.dto.productName}</a></td>
+				<td>CONTENTS</td>
+				<td>RATE</td>
+				<td>JUMSU</td>
 			</tr>
 		</c:forEach>
 
@@ -85,6 +88,8 @@
 		  </ul>
 		</nav>
 	</div>
+	
+
 	
 	<a href="add" class="btn btn-success">Add</a>
 	
