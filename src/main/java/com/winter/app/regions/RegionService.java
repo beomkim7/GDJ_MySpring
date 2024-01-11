@@ -39,29 +39,8 @@ public class RegionService {
 	//insert
 	public int add(RegionDTO regionDTO, MultipartFile file)throws Exception{
 		 int result= regionDAO.add(regionDTO);
-		//1. 어디에 저장할 것인가??
-		String path = servletContext.getRealPath("/resources/upload");
-		
-		System.out.println(path);
-		File f = new File(path, "regions");
-		
-		if(!f.exists()) {
-			f.mkdirs();
-		}
-		
-		//2. 어떤 파일명으로 저장할 것인가??
-		//a. 시간 사용
-		Calendar ca = Calendar.getInstance();
-		String fileName=ca.getTimeInMillis()+"_"+file.getOriginalFilename();
-		System.out.println(fileName);
-		//b. UUID
-		fileName=UUID.randomUUID().toString()+"_"+file.getOriginalFilename();
-		System.out.println(fileName);
-		
-		//3. 파일을 저장
-		//a. FileCopyUtils 클래스 사용
-		f= new File(f, fileName);
-		FileCopyUtils.copy(file.getBytes(), f);
+
+		 
 		
 		//4. DB에 정보 저장
 		RegionFileDTO dto = new RegionFileDTO();
